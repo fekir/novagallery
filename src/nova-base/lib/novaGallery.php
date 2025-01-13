@@ -213,6 +213,7 @@ class novaGallery {
   
   protected function readCache($dir, $maxAge){
     $cacheFile = $dir.'/'.$this->cacheDir.'/'.$this->cacheFile;
+    $cacheFile = str_replace(IMAGES_URL, CACHE_URL, $cacheFile);
     if(file_exists($cacheFile)){
       $age = time() - filemtime($cacheFile);
       if($age > $maxAge) {
@@ -233,6 +234,7 @@ class novaGallery {
 
   protected function writeCache($dir){
     $cacheDir =  $dir.'/'.$this->cacheDir;
+    $cacheDir = str_replace(IMAGES_DIR, CACHE_DIR, $cacheDir);
     if(!file_exists($cacheDir)){
       mkdir($cacheDir, 0777, true);
     }
