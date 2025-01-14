@@ -236,7 +236,12 @@ class novaGallery {
     $cacheDir =  $dir.'/'.$this->cacheDir;
     $cacheDir = str_replace(IMAGES_DIR, CACHE_DIR, $cacheDir);
     if(!file_exists($cacheDir)){
-      mkdir($cacheDir, 0777, true);
+      if(!mkdir($cacheDir, 0777, true)){
+        $current_error_reporting = error_reporting();
+        if ($current_error_reporting !== 0) {
+          echo "Unable to create directory ".$cacheDir;
+        }
+      }
     }
     $cacheFile = $cacheDir.'/'.$this->cacheFile;
     $content = ['images' => $this->images, 'albums' => $this->albums];
